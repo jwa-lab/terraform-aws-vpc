@@ -14,6 +14,6 @@ variable "azs_number" {
 
   validation {
     condition = var.azs_number <= 3
-    error_message = "You cannot deploy in more than 3 availability zones"
+    error_message = "You cannot deploy in more than 3 availability zones."
   }
 }

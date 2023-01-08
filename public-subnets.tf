@@ -7,7 +7,7 @@ resource "aws_route_table" "public_route_table" {
   }
 
   tags = {
-    Name = "${local.vpc_name}-public"
+    Name = "${var.vpc_name}-public"
   }
 }
 
@@ -24,7 +24,7 @@ resource "aws_subnet" "public_subnets" {
   cidr_block = join("", ["10.0.", index(local.vpc_azs, each.value)*64, ".0/18"])
 
   tags = {
-    Name = "${local.vpc_name}-public-${each.key}"
+    Name = "${var.vpc_name}-public-${each.key}"
     visibility = "public"
   }
 }

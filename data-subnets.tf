@@ -14,7 +14,7 @@ resource "aws_subnet" "data_subnets" {
   availability_zone = each.value
 
   tags = {
-    Name = "${local.vpc_name}-data-${each.value}"
+    Name = "${var.vpc_name}-data-${each.value}"
     visibility = "private"
     target = "data"
   }
@@ -27,5 +27,5 @@ resource "aws_route_table_association" "data_subnets_rta" {
   for_each = aws_subnet.data_subnets
 
   subnet_id = each.value.id
-  route_table_id = aws_route_table.nat_gw_route_tables[each.key].id
+  route_table_id = aws_route_table.nat_gateways_route_tables[each.key].id
 }

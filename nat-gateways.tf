@@ -5,7 +5,7 @@ resource "aws_eip" "public_subnets_ips" {
   vpc = true
 
   tags = {
-    Name = "${local.vpc_name}-${each.key}"
+    Name = "${var.vpc_name}-${each.key}"
   }
 
   depends_on = [aws_internet_gateway.internet_gateway]
@@ -19,13 +19,13 @@ resource "aws_nat_gateway" "nat_gateways" {
   allocation_id = aws_eip.public_subnets_ips[each.key].id
 
   tags = {
-    Name = "${local.vpc_name}-${each.key}"
+    Name = "${var.vpc_name}-${each.key}"
   }
 
   depends_on = [aws_eip.public_subnets_ips]
 }
 
-resource "aws_route_table" "nat_gw_route_tables" {
+resource "aws_route_table" "nat_gateways_route_tables" {
   # 1 private route table per AZ associated with each NAT gateways
   for_each = toset(local.vpc_azs)
 
@@ -37,7 +37,7 @@ resource "aws_route_table" "nat_gw_route_tables" {
   }
 
   tags = {
-    Name = "${local.vpc_name}-private-${each.value}"
+    Name = "${var.vpc_name}-private-${each.value}"
     target = "nat-gw"
   }
 }

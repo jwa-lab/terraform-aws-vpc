@@ -4,9 +4,11 @@ output "vpc_id" {
    * With the "depends_on" instruction, we can make sure the subnets are available when the id is exported.
    */
   depends_on = [
-    aws_subnet.public_subnets,
-    aws_subnet.apps_subnets,
-    aws_subnet.data_subnets,
+    aws_route_table.nat_gateways_route_tables,
+    aws_route_table_association.public_subnets_rta,
+    aws_route_table_association.apps_subnets_rta,
+    aws_route_table_association.data_subnets_rta,
+    aws_vpc_endpoint_route_table_association.s3
   ]
 
   value = aws_vpc.vpc.id

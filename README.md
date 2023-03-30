@@ -9,4 +9,4 @@ A Terraform module to create a VPC in AWS. It contains:
 * 2 or 3 private subnets for data
 * 1 NAT Gateway per subnet with a route table allow outbound traffic
 
-![VPC](docs/vpc.png)
+![vpc](https://user-images.githubusercontent.com/86591400/228876266-b76cb060-46ef-400d-83df-262f88cf487f.png)
